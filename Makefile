@@ -50,6 +50,7 @@ ${OBJDIR}/%.o: ${SRCDIR}/%.c
 	@/bin/mkdir -p ${OBJDIR}
 	@${CC} ${CFLAGS} ${LDFLAGS} -c -o $@ $<
 	@echo ${G}Success"   "[$@]${X}
+	@printf ${UP}
 	
 ############################## GENERAL #########################################
 
