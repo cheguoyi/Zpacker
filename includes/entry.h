@@ -1,3 +1,6 @@
+#ifndef ENTRY_H
+#define ENTRY_H
+
 #include<stddef.h>
 #include<elf.h>
 struct				entry
@@ -8,3 +11,5 @@ struct				entry
 	size_t			end_of_last_section;
 	size_t			offset_in_section;
 };
+
+#endif

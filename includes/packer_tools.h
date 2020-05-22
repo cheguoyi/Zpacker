@@ -1,3 +1,5 @@
+#ifndef PACKER_TOOLS_H
+#define PACKER_TOOLS_H
 #include"entry.h"
 #include "call_back_func.h"
 
@@ -15,3 +17,5 @@ bool adjust_sizes(size_t shift_amount);
 bool setup_payload(struct entry &original_entry);
 //修改入口地址，主要是对elf_header的修改
 bool change_entry(struct entry &original_entry);
+
+#endif
