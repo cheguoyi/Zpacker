@@ -1,5 +1,4 @@
 #include"zpacker.h"
-#include"file.h"
 
 int main(int argc, char *argv[])
 {
@@ -25,10 +24,11 @@ int main(int argc, char *argv[])
             goto exit;
         }
 	    //调用elf64_packer
-        if(filepakcer(argv[i],filesize)){
+        if(!filepakcer(argv[i],filesize)){
             printf("Pack file %d :%s fail\n",i,argv[i]);
 	        goto exit;
         }
+		//写出加壳后的文件
 	    if (!write_clone_file(argv[i])){
             goto exit;
         }
