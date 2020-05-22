@@ -4,7 +4,7 @@
 #include<stddef.h>
 #include<elf.h>
 
-struct				entry
+struct	entry
 {
 	struct elf64_phdr	*safe_phdr;
 	struct elf64_shdr	*safe_shdr;
