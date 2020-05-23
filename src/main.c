@@ -17,13 +17,17 @@ int main(int argc, char *argv[])
 	    if (filesize == 0){
             goto exit;
         }
-        //复制信息，无需memcpy
-        original_file=filelist[i];
+
+		if(!elf64_identifier()){
+			goto  exit;
+		}
+		elf64_viewer(original_safe);
         //为文件指针分配缓存
 	    if (!alloc_clone(filesize)){
             goto exit;
         }
 	    //调用elf64_packer
+		printf("start to pack\n");
         if(!filepakcer(filesize)){
             printf("Pack file %d :%s fail\n",i,argv[i]);
 	        goto exit;

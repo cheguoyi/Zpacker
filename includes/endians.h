@@ -10,6 +10,6 @@ uint16_t endian_2(uint16_t n);
 uint32_t endian_4(uint32_t n);
 uint64_t endian_8(uint64_t n);
 
-bool	big_endian = false;
 
+static bool big_endian ;
 #endif

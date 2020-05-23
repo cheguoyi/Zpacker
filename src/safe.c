@@ -4,8 +4,9 @@
 __attribute__((warn_unused_result))
 void *original_safe(const size_t offset, const size_t size)
 {
-	if (offset + size > original_file.filesize || offset + size < offset)
-		return (NULL);
+	if (offset + size > original_file.filesize || offset + size < offset){
+        return (NULL);
+    }
 	return (original_file.pointer + offset);
 }
 //输出文件缓存内存检查器
@@ -26,6 +27,8 @@ size_t read_file(const char *filename){
 		return (errors(ERR_SYS, "open failed"));
 	if (fstat(fd, &buf) < 0)
 		return (errors(ERR_SYS, "fstat failed"));
+    if (buf.st_mode & S_IFDIR)
+		return (errors(ERR_USAGE, "can't parse directories"));
 	if ((ptr = mmap(0, buf.st_size, PROT_READ, MAP_PRIVATE, fd, 0)) == MAP_FAILED)
 		return (errors(ERR_SYS, "mmap failed"));
 	if (close(fd))
@@ -43,7 +46,6 @@ bool alloc_clone(const size_t original_filesize)
 	clone_file.pointer = malloc(clone_file.filesize);
 	if (clone_file.pointer == NULL)
 		return (errors(ERR_SYS, "while allocating clone"));
-
 	return (true);
 }
 __attribute__((warn_unused_result))

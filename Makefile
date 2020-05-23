@@ -1,6 +1,6 @@
 NAME = Zpacker
 
-SRC = main.c endian.c file.c iterators.c packer.c safe.c \
+SRC = main.c endian.c file.c iterators.c packer.c safe.c elf64_viewer.c\
 	  pack_step/adjust_references.c \
 	  pack_step/adjust_sizes.c \
 	  pack_step/change_entry.c \
@@ -8,7 +8,8 @@ SRC = main.c endian.c file.c iterators.c packer.c safe.c \
 	  pack_step/define_shift.c \
 	  pack_step/find_entry.c \
 	  pack_step/load_code.c \
-	  encrypt.s  load_code.s 
+	  encrypt.s \
+	  elf64_payload.s 
 
 
 SRCDIR = src
@@ -29,7 +30,7 @@ AS = nasm
 
 ASFALGS = -f elf64 -g
 
-LDFLAGS = -I includes
+LDFLAGS = -I includes/
 
 
 ############################## COLORS ##########################################
@@ -67,7 +68,7 @@ ${OBJDIR}/%.o: ${SRCDIR}/%.s
 	@/bin/mkdir -p ${OBJDIR} ${OBJDIR}/pack_step
 	@${AS} ${ASFLAGS} -o $@ $<
 	@printf ${UP}
-	
+
 ${OBJDIR}/%.o: ${SRCDIR}/%.c
 	@echo ${B} compiling [$@]...
 	@/bin/mkdir -p ${OBJDIR} ${OBJDIR}/pack_step

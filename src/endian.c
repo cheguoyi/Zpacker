@@ -1,5 +1,5 @@
 #include"endians.h"
-
+static bool big_endian =false ;
 void endian_big_mode(bool is_big_endian)
 {
 	big_endian = is_big_endian;

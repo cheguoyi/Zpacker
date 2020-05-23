@@ -77,4 +77,12 @@ void fill_info(struct real_entry_info *info,struct entry *original_entry);
 
 void generate_key(char *buf,size_t size);
 
+
+
+
+
+
+bool	elf64_identifier(void);
+bool	elf64_viewer(check_safe_func_pointer safe);
+
 #endif

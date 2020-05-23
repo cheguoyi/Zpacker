@@ -1,3 +1,15 @@
+; **************************************************************************** ;
+;                                                                              ;
+;                                                         :::      ::::::::    ;
+;    elf64_payload.s                                    :+:      :+:    :+:    ;
+;                                                     +:+ +:+         +:+      ;
+;    By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+         ;
+;                                                 +#+#+#+#+#+   +#+            ;
+;    Created: 2019/02/11 14:08:33 by agrumbac          #+#    #+#              ;
+;    Updated: 2019/06/03 21:29:48 by agrumbac         ###   ########.fr        ;
+;                                                                              ;
+; **************************************************************************** ;
+
 %define SYSCALL_WRITE		0x1
 %define SYSCALL_MPROTECT	0xa
 %define STDOUT			0x1
@@ -5,10 +17,10 @@
 %define CALL_INSTR_SIZE		0x5
 
 section .text
-	global begin_payload
-	global end_payload
+	global load_begin
+	global load_end
 
-load_bigin:
+load_begin:
 ;------------------------------; Store variables
 	call mark_below
 	db "128 bit key here", "rel ptld", "ptldsize", "rel text"
