@@ -78,11 +78,14 @@ ${OBJDIR}/%.o: ${SRCDIR}/%.c
 
 ############################## GENERAL #########################################
 
+exist = $(shell if [ -f $(NAME) ]; then echo "exist"; else echo "notexist"; fi;)
 
 .PHONY: all clean 
 clean:
-	@echo ${R}Cleaning"  "[objs]...${X}
+	@echo ${R}Cleaning"  "[${OBJ}]...${X}
 	@/bin/rm -Rf ${OBJDIR}
-	@/bin/rm -Rf ${NAME}
-	@/bin/rm packed_test
+ifeq (${exist}, exist)
+	@/bin/rm ${NAME}
+endif
+
 -include ${DEP}

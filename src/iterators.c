@@ -8,7 +8,6 @@ bool	foreach_phdr(check_safe_func_pointer safe, f_iter_callback callback)
 
 	//program header table 偏移量
 	const Elf64_Off		phoff     = endian_8(elf64_hdr->e_phoff);
-	int num=phoff;
 	//Size of program header entry
 	const Elf64_Half	phentsize = endian_2(elf64_hdr->e_phentsize);
 	//Number of program header entries
