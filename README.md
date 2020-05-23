@@ -35,6 +35,8 @@ make
 
 ## How to test
 
+## build packed test file and run
+
 ``` bash
 
 gcc test.c -o test
@@ -48,5 +50,12 @@ gcc test.c -o test
 
 ``` bash
 zpacker:hello world
+
+```
+## How to clean redundancy
+
+``` bash
+
+make clean
 
 ```

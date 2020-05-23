@@ -2,3 +2,5 @@ a.out
 Zpacker
 *.o
 obj/
+test
+packed_test
