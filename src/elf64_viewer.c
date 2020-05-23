@@ -130,11 +130,6 @@ bool elf64_identifier(check_safe_func_pointer safe)
 		return (false);
 
 	// set endian for the future
-	if(hdr->e_ident[EI_DATA] == ELFDATA2MSB){
-		printf("true\n");
-	}else{
-		printf("false\n");
-	}
 	endian_big_mode(hdr->e_ident[EI_DATA] == ELFDATA2MSB);
 
 	return (true);

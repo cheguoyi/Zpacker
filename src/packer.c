@@ -21,12 +21,10 @@ bool filepakcer(size_t original_file_size){
 
         return false;
     }
-    printf("setup_load_code\n");
     if(!setup_load_code(&original_entry)){
 
         return false;
     }
-    printf("chang entry\n");
 	if(!change_entry(&original_entry)){
 
         return false;

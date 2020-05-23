@@ -44,7 +44,6 @@ bool alloc_clone(const size_t original_filesize)
 {
 	clone_file.filesize = original_filesize;
 	clone_file.pointer = malloc(clone_file.filesize);
-    printf("clone size is %d\n",clone_file.filesize);
 	if (clone_file.pointer == NULL)
 		return (errors(ERR_SYS, "while allocating clone"));
 	return (true);
@@ -54,7 +53,6 @@ bool resize_clone(const size_t added_size)
 {
 	clone_file.filesize += added_size;
 	clone_file.pointer = realloc(clone_file.pointer,clone_file.filesize);
-    printf("after realloc clone size is %d\n",clone_file.filesize);
 	if (clone_file.pointer == NULL)
 		return (errors(ERR_SYS, "while reallocating clone"));
 

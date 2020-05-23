@@ -11,5 +11,5 @@ uint32_t endian_4(uint32_t n);
 uint64_t endian_8(uint64_t n);
 
 
-static bool big_endian ;
+
 #endif
