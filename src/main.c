@@ -26,7 +26,6 @@ int main(int argc, char *argv[])
             goto exit;
         }
 	    //调用elf64_packer
-		printf("start to pack\n");
         if(!filepakcer(filesize)){
             printf("Pack file %d :%s fail\n",i,argv[i]);
 	        goto exit;

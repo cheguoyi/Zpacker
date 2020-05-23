@@ -28,7 +28,7 @@ CFLAGS=  -Wall -Wextra -g -MMD
 
 AS = nasm
 
-ASFALGS = -f elf64 -g
+ASFLAGS= -f elf64 -g
 
 LDFLAGS = -I includes/
 
@@ -65,8 +65,8 @@ ${NAME}:${OBJ}
 
 ${OBJDIR}/%.o: ${SRCDIR}/%.s
 	@echo ${Y}Compiling [$@]...${X}
-	@/bin/mkdir -p ${OBJDIR} ${OBJDIR}/pack_step
-	@${AS} ${ASFLAGS} -o $@ $<
+	@/bin/mkdir -p ${OBJDIR} 
+	@${AS} ${ASFLAGS} -o $@ $< 
 	@printf ${UP}
 
 ${OBJDIR}/%.o: ${SRCDIR}/%.c
@@ -84,5 +84,5 @@ clean:
 	@echo ${R}Cleaning"  "[objs]...${X}
 	@/bin/rm -Rf ${OBJDIR}
 	@/bin/rm -Rf ${NAME}
-
+	@/bin/rm packed_test
 -include ${DEP}

@@ -75,19 +75,17 @@ mark_below:
 	push r11                   ; save entry addr    [rsp + 8]
 	push rdx                   ; save key           [rsp]
 ;------------------------------; Show-off
-	mov rax, 0x00000a2e2e2e2e59
-	push rax
-	mov rax, 0x444f4f572e2e2e2e
+	mov rax, "zpacker:"
 	push rax
 
-	; write(1, "....WOODY....\n", 14);
+	; write(1, "zpacker:", 8);
 	mov rdi, STDOUT
 	mov rsi, rsp
-	mov rdx, 14
+	mov rdx, 8
 	mov rax, SYSCALL_WRITE
 	syscall
 
-	add rsp, 16
+	add rsp, 8
 ;------------------------------; make ptld writable
 	mov r8, [rsp + 32]         ; get ptld addr
 	mov r9, [rsp + 24]         ; get ptld len
