@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
 	{	
 		goto exit;
 	}
-
+	endian_big_mode(true);
 	//读取文件
     for(int i=1;i<argc;i++){
         filesize = read_file(argv[i]);
@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
             goto exit;
         }
 	    //调用elf64_packer
-        if(!filepakcer(argv[i],filesize)){
+        if(!filepakcer(filesize)){
             printf("Pack file %d :%s fail\n",i,argv[i]);
 	        goto exit;
         }

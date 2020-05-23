@@ -3,15 +3,15 @@ void free_clone(void){
     free(clone_file.pointer);
 }
 
-void free_original(void){
+bool free_original(void){
 	if (original_file.pointer)
 	{
-		if (munmap(original_file.pointer, original_file.pointer)){
+		if (munmap(original_file.pointer, original_file.filesize)){
             printf("free_file false\n");
             return false;
         }
 	}
-	return (true);
+	return true;
 }
 
 bool write_clone_file(char *filename){

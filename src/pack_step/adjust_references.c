@@ -29,14 +29,14 @@ bool adjust_references(size_t shift_amount, struct entry *original_entry){
     }
     return true;
 }
-static void adjust_sheader_table_offset(Elf64_Ehdr *header){
+void adjust_sheader_table_offset(Elf64_Ehdr *header){
     Elf64_Off sec_header_off=endian_8(header->e_phoff);
     sec_header_off+=closure.shift_amount;
     header->e_shoff=endian_8(sec_header_off);
     return;
 }
 //回调函数，用来调整插入代码段后所有section的位置信息
-static bool shift_sec_header_position(check_safe_func_pointer csf,const size_t offset){
+bool shift_sec_header_position(check_safe_func_pointer csf,const size_t offset){
     Elf64_Shdr *sec_header=csf(offset,sizeof(Elf64_Shdr));
     if(sec_header==NULL) return errors(ERR_CORRUPT,"fail to get section header : shift sec position");
     Elf64_Off sec_offset=endian_8(sec_header->sh_offset);
@@ -47,7 +47,7 @@ static bool shift_sec_header_position(check_safe_func_pointer csf,const size_t o
     return true;
 }
 //回调函数，用来调整插入代码段后所有segment的位置信息
-static bool shift_seg_header_position(check_safe_func_pointer csf,const size_t offset){
+bool shift_seg_header_position(check_safe_func_pointer csf,const size_t offset){
     Elf64_Phdr *seg_header=csf(offset,sizeof(Elf64_Phdr));
     if(seg_header==NULL) return errors(ERR_CORRUPT,"fail to get segment header : shift seg position" );
     Elf64_Off seg_offset=endian_8(seg_header->p_offset);

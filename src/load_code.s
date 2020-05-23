@@ -8,7 +8,7 @@ section .text
 	global begin_payload
 	global end_payload
 
-begin_payload:
+load_bigin:
 ;------------------------------; Store variables
 	call mark_below
 	db "128 bit key here", "rel ptld", "ptldsize", "rel text"
@@ -196,4 +196,4 @@ __while_size_ge_8:
 
 	leave
 	ret
-end_payload:
+load_end:

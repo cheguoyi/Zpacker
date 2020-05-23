@@ -1,7 +1,7 @@
 #include"zpacker.h"
 #include"packer_tools.h"
 
-bool filepakcer(char* file,size_t original_file_size){
+bool filepakcer(size_t original_file_size){
     struct entry	original_entry;
     size_t		shift_amount; 
 
@@ -10,7 +10,7 @@ bool filepakcer(char* file,size_t original_file_size){
 	|| !copy_to_clone(original_entry.end_of_last_section, shift_amount, original_file_size)
 	|| !adjust_references(shift_amount, &original_entry)
 	|| !adjust_sizes(shift_amount)
-	|| !setup_payload(&original_entry)
+	|| !setup_load_code(&original_entry)
 	|| !change_entry(&original_entry)){
         return false;
     }

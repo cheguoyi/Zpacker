@@ -57,7 +57,7 @@ void fill_info(struct real_entry_info *info,struct entry *original_entry){
     
 }
 
-static void generate_key(char *buf,size_t size){
+void generate_key(char *buf,size_t size){
     srand(time(NULL));
     for(size_t i=0;i<size;i++){
         buf[i]=rand();

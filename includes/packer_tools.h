@@ -3,7 +3,18 @@
 
 #include<stdint.h>
 #include<stddef.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <stdbool.h>
+# include <stdint.h>
+# include <string.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <sys/stat.h>
+# include <sys/mman.h>
+#include<time.h>
 
+# include "errors.h"
 #include"entry.h"
 #include"call_back_func.h"
 #include"file.h"
@@ -36,7 +47,6 @@ void	load_begin(void);
 //插入代码段结束位置
 void	load_end(void);
 
-typedef unsigned int uint;
 
 void		encrypt(uint num_rounds, char *data, uint32_t const key[4], size_t size);
 void		decrypt(uint num_rounds, char *data, uint32_t const key[4], size_t size);
@@ -54,5 +64,17 @@ struct real_entry_info{
 
 #define SECRET_SIGNATURE "welcome to Zpacker"
 #define SECRET_LEN sizeof(SECRET_SIGNATURE)
+
+
+
+void adjust_sheader_table_offset(Elf64_Ehdr *header);
+//回调函数，用来调整插入代码段后所有section的位置信息
+bool shift_sec_header_position(check_safe_func_pointer csf,const size_t offset);
+//回调函数，用来调整插入代码段后所有segment的位置信息
+bool shift_seg_header_position(check_safe_func_pointer csf,const size_t offset);
+
+void fill_info(struct real_entry_info *info,struct entry *original_entry);
+
+void generate_key(char *buf,size_t size);
 
 #endif
