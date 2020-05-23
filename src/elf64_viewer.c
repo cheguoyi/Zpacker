@@ -117,9 +117,9 @@ bool		elf64_viewer(check_safe_func_pointer safe)
 	return true;
 }
 
-bool elf64_identifier(void)
+bool elf64_identifier(check_safe_func_pointer safe)
 {
-	const Elf64_Ehdr	*hdr = original_safe(0, sizeof(*hdr));
+	const Elf64_Ehdr	*hdr = safe(0, sizeof(*hdr));
 
 	if (hdr == NULL                                // no header at all!
 	|| memcmp(hdr->e_ident, ELFMAG, SELFMAG) != 0  // wrong Magic

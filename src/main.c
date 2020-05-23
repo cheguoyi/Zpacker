@@ -18,10 +18,9 @@ int main(int argc, char *argv[])
             goto exit;
         }
 
-		if(!elf64_identifier()){
+		if(!elf64_identifier(original_safe)){
 			goto  exit;
 		}
-		elf64_viewer(original_safe);
         //为文件指针分配缓存
 	    if (!alloc_clone(filesize)){
             goto exit;

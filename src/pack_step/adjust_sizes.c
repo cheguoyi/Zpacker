@@ -4,7 +4,6 @@ bool adjust_sizes(size_t shift_amount){
 	struct entry	clone_entry;
 	const size_t	payload_size = load_end-load_begin;
 
-    //elf64_viewer(clone_safe);
 	if (!find_entry(&clone_entry, clone_safe))
 		return errors(ERR_THROW, "adjust_sizes");
 

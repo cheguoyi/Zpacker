@@ -5,13 +5,30 @@ bool filepakcer(size_t original_file_size){
     struct entry	original_entry;
     size_t		shift_amount; 
 
-    if (!find_entry(&original_entry, original_safe)
-	|| !define_shift_amount(&original_entry, &shift_amount)
-	|| !copy_to_clone(original_entry.end_of_last_section, shift_amount, original_file_size)
-	|| !adjust_references(shift_amount, &original_entry)
-	|| !adjust_sizes(shift_amount)
-	|| !setup_load_code(&original_entry)
-	|| !change_entry(&original_entry)){
+    if (!find_entry(&original_entry, original_safe)){
+        return false;
+    }
+    if(!define_shift_amount(&original_entry, &shift_amount)){
+        return false;
+    }
+    if(!copy_to_clone(original_entry.end_of_last_section, shift_amount, original_file_size)){
+        return false;
+    }
+    if(!adjust_references(shift_amount, &original_entry)) {
+        return false;
+    }
+    if(!adjust_sizes(shift_amount)){
+
+        return false;
+    }
+    printf("setup_load_code\n");
+    if(!setup_load_code(&original_entry)){
+
+        return false;
+    }
+    printf("chang entry\n");
+	if(!change_entry(&original_entry)){
+
         return false;
     }
     

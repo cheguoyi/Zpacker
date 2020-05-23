@@ -62,11 +62,10 @@ struct real_entry_info{
     uint64_t text_size;
 }__attribute__((packed));
 
-#define SECRET_SIGNATURE "welcome to Zpacker"
+#define SECRET_SIGNATURE "zpacker"
 #define SECRET_LEN sizeof(SECRET_SIGNATURE)
 
-
-
+void adjust_phdr_table_offset(Elf64_Ehdr *safe_elf_hdr);
 void adjust_sheader_table_offset(Elf64_Ehdr *header);
 //回调函数，用来调整插入代码段后所有section的位置信息
 bool shift_sec_header_position(check_safe_func_pointer csf,const size_t offset);
@@ -82,7 +81,7 @@ void generate_key(char *buf,size_t size);
 
 
 
-bool	elf64_identifier(void);
+bool	elf64_identifier(check_safe_func_pointer safe);
 bool	elf64_viewer(check_safe_func_pointer safe);
 
 #endif
