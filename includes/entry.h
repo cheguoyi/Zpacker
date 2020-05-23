@@ -2,7 +2,7 @@
 #define ENTRY_H
 
 #include<stddef.h>
-#include<elf.h>
+#include<linux/elf.h>
 
 struct	entry
 {
