@@ -21,7 +21,10 @@ typedef struct file_point {
 void free_clone(void);
 void free_original(void);
 bool write_clone_file(char *filename);
-
+size_t	read_file(const char *filename);
+bool alloc_clone(filesize);
+bool alloc_clone(const size_t original_filesize);
+bool resize_clone(const size_t added_size);
 struct file_point filelist[FILE_NUM_MAX];
 struct file_point original_file;
 struct file_point clone_file;

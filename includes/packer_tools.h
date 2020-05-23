@@ -13,7 +13,7 @@
 //获取入口信息
 bool find_entry(struct entry *original_entry, check_safe_func_pointer original_safe);
 //确定如何插入，如果segment剩余量足以插入就不再realloc
-bool define_shift_amount(struct entry *original_entry, size_t *shift_amount);
+bool define_shift_amount(const struct entry *original_entry, size_t *shift_amount);
 //拷贝源文件信息，留出插入代码空间
 bool copy_to_clone(size_t end_of_last_sect,size_t shift_amount, size_t original_file_size);
 //修改入口信息以及各个section和segment的偏移位置等信息

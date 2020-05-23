@@ -1,16 +1,31 @@
 NAME = Zpacker
 
-SRC = main.c  hello.c
+SRC = main.c endian.c file.c iterators.c packer.c \
+	  encrypt.s  load_code.s  \
+	  pack_step/adjust_references.c \
+	  pack_step/adjust_sizes.c \
+	  pack_step/change_entry.c \
+	  pack_step/copy_clone.c \
+	  pack_step/define_shift.c \
+	  pack_step/find_entry.c \
+	  pack_step/load_code.c \
+
 
 SRCDIR = src
 
 OBJDIR = obj
 
-OBJ = $(addprefix ${OBJDIR}/,$(SRC:.c=.o))
+OBJC = $(addprefix ${OBJDIR}/,$(SRC:.c=.o))
 
-CC =gcc
+OBJ = $(OBJC:.s=.o)
 
-CFLAGS=
+CC = gcc
+
+CFLAGS=  -Wall -Wextra -g -MMD 
+
+AS = nasm
+
+ASFALGS = -f elf64 -g
 
 LDFLAGS = -I includes
 
@@ -42,16 +57,21 @@ all:${NAME}
 
 ${NAME}:${OBJ}
 	@echo ${B} compiling and linking [${OBJ}]...
-	@${CC} ${CFLAGS} -o $@ ${OBJ}
+	@${CC} ${CFLAGS} ${LDFLAGS}  -o $@ ${OBJ}
 	@echo ${G}Success"   "[${NAME}]${X}
 
 ${OBJDIR}/%.o: ${SRCDIR}/%.c
 	@echo ${B} compiling [$@]...
-	@/bin/mkdir -p ${OBJDIR}
+	@/bin/mkdir -p ${OBJDIR} ${OBJDIR}/step
 	@${CC} ${CFLAGS} ${LDFLAGS} -c -o $@ $<
 	@echo ${G}Success"   "[$@]${X}
 	@printf ${UP}
-	
+
+${OBJDIR}/%.o: ${SRCDIR}/%.s
+	@echo ${Y}Compiling [$@]...${X}
+	@/bin/mkdir -p ${OBJDIR} ${OBJDIR}/step
+	@${AS} ${ASFLAGS} -o $@ $<
+	@printf ${UP}
 ############################## GENERAL #########################################
 
 
