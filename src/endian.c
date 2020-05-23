@@ -1,8 +1,4 @@
-#include"endian.h"
-#include<stdint.h>
-#include<stdbool.h>
-
-static bool	big_endian = false;
+#include"endians.h"
 
 void endian_big_mode(bool is_big_endian)
 {
