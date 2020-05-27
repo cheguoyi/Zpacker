@@ -9,7 +9,7 @@ SRC = main.c endian.c file.c iterators.c packer.c safe.c elf64_viewer.c\
 	  pack_step/find_entry.c \
 	  pack_step/load_code.c \
 	  encrypt.s \
-	  elf64_payload.s 
+	  load_code.s
 
 
 SRCDIR = src
