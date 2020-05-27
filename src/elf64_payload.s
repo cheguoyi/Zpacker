@@ -150,44 +150,14 @@ decipher:;---------------------; begin decipher subprocedure
 	mov rax, rdi
 	imul rax, rcx              ; sum = delta * num_rounds
 
-__loop_num_rounds:
-	mov r8, r10
-	shl r8, 4
-	mov r9, r10
-	shr r9, 5
-	xor r8, r9
-	add r8, r10                ; r8 = ((v0 << 4) ^ (v0 >> 5)) + v0
-	mov r9, rax
-	shr r9, 11
-	and r9, 3
-	shl r9, 2                  ; These concealed pointers,
-	add r9, rdx                ; Oh abstraction from beyond !
-	mov r9d, DWORD [r9]        ; Defenseless naked...
-	add r9, rax                ; r9 = (sum + key[(sum>>11) & 3])
-	xor r8, r9
-	sub r11d, r8d              ; v1 -= (r8 ^ r9)
+	mov rax, 0xffffffff
 
-	sub rax, rdi               ; sum -= delta
+	xor r11, rax
+	xor r10, rax
 
-	mov r8, r11
-	shl r8, 4
-	mov r9, r11
-	shr r9, 5
-	xor r8, r9
-	add r8, r11                ; r8 = ((v1 << 4) ^ (v1 >> 5)) + v1
-	mov r9, rax
-	and r9, 3
-	shl r9, 2                  ; Refined typed arrays,
-	add r9, rdx                ; Forever unwavering...
-	mov r9d, DWORD [r9]        ; Save us from the void !
-	add r9, rax                ; r9 = (sum + key[sum & 3])
-	xor r8, r9
-	sub r10d, r8d              ; v0 -= (r8 ^ r9)
+	xor rax,rax
+ ; load result back in v
 
-	dec rcx                    ; loop until count reaches 0
-	test rcx, rcx
-	jnz __loop_num_rounds
-	                           ; load result back in v
 	mov rax, r11               ; [.... 0000] rax
 	shl rax, 32                ; [0000 ....] rax
 	mov rcx, 0xffffffff

@@ -45,44 +45,14 @@ encipher:;---------------------; begin encipher subprocedure
 	mov rcx, r12               ; count = num_rounds
 	xor rax, rax               ; sum = 0
 
-__loop_num_rounds:
-	mov r8, r11
-	shl r8, 4
-	mov r9, r11
-	shr r9, 5
-	xor r8, r9
-	add r8, r11                ; r8 = ((v1 << 4) ^ (v1 >> 5)) + v1
-	mov r9, rax
-	and r9, 3
-	shl r9, 2                  ; Those sweet C arrays...
-	add r9, rdx                ; Oh sugar to our eyes !
-	mov r9d, DWORD [r9]        ; Far off deep below...
-	add r9, rax                ; r9 = (sum + key[sum & 3])
-	xor r8, r9
-	add r10d, r8d              ; v0 += (r8 ^ r9)
+	mov rax, 0xffffffff
 
-	add rax, rdi               ; sum += delta
+	xor r11, rax
+	xor r10, rax
 
-	mov r8, r10
-	shl r8, 4
-	mov r9, r10
-	shr r9, 5
-	xor r8, r9
-	add r8, r10                ; r8 = ((v0 << 4) ^ (v0 >> 5)) + v0
-	mov r9, rax
-	shr r9, 11
-	and r9, 3
-	shl r9, 2                  ; Pretty square brackets !
-	add r9, rdx                ; Syntactic prose of heavens,
-	mov r9d, DWORD [r9]        ; They come from above...
-	add r9, rax                ; r9 = (sum + key[(sum>>11) & 3])
-	xor r8, r9
-	add r11d, r8d              ; v1 += (r8 ^ r9)
+	xor rax,rax
+ ; load result back in v
 
-	dec rcx                    ; loop until count reaches 0
-	test rcx, rcx
-	jnz __loop_num_rounds
-	                           ; load result back in v
 	mov rax, r11               ; [.... 0000] rax
 	shl rax, 32                ; [0000 ....] rax
 	mov rcx, 0xffffffff
